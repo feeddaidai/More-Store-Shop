@@ -14,4 +14,16 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
+    #商品
+    $router->resource('goods/spu','GoodsController');
+    $router->resource('goods/sku','GoodsSkuController');
+
+    #用户
+    $router->resource('user/normal','UserNormalController');
+
+
+    #api
+    Route::get('api/spec','SpecController@getName');
+    Route::get('api/spec/value','SpecController@getValue');
+
 });
