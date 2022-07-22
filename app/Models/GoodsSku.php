@@ -10,14 +10,21 @@ class GoodsSku extends BaseModel
 {
     protected $table = 'goods_sku';
     use SoftDeletes;
+    protected $appends = ['main_image_path','image_list_path','spec_list'];
 
-    public function getOne()
+
+    public function getMainImagePathAttribute($value)
     {
-        return 1;
+        return GoodsImage::getOne($this->main_image);
     }
 
+    public function getImageListPathAttribute($value)
+    {
+        return GoodsImage::getManyByStr($this->images);
+    }
 
-
-
-
+    public function getSpecListAttribute()
+    {
+        return SkuSpecValue::getOne($this->id);
+    }
 }

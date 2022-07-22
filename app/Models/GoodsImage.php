@@ -6,6 +6,8 @@ namespace App\Models;
 
 class GoodsImage extends BaseModel
 {
+    protected $hidden = ['created_at','updated_at'];
+
     public function storage($path)
     {
         #存储三种不同大小

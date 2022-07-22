@@ -51,7 +51,7 @@ class GoodsSku extends EloquentRepository
                 $model->images         = img_to_str($attributes['images']);
                 $model->goods_storage  = $attributes['goods_storage'];
                 $model->price          = (float)$attributes['price'];
-                $model->putaway_status = $attributes['putaway_status'];
+                $model->putaway_status = $attributes['putaway_status'] ?? 0;
                 $model->save();
                 $skuId = $model->getKey();
                 #存储规格

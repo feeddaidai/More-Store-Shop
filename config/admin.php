@@ -12,13 +12,15 @@ return [
     |
     */
     'name' => 'MoreStore',
-
+    //临时全局配置
     'storeId'                   => 1,
     'storeName'                 => '自营',
     'thumb'                     => 'thumb_image',
     'medium'                    => 'medium_image',
     'big'                       => 'big_image',
     'uploadsDir'                => '/uploads/',
+    'loginExp' => 604800,
+    'loginError' => 3,
 
     /*
     |--------------------------------------------------------------------------

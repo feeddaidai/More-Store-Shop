@@ -21,7 +21,7 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
   var multiLineStrings = parserConfig.multiLineStrings;
 
   var keywords = words(
-          "package continue return object while break class data trait throw super" +
+          "package continue return object while break class data Trait throw super" +
           " when type this else This try val var fun for is in if do as true false null get set");
   var softKeywords = words("import" +
       " where by get set abstract enum open annotation override private public internal" +

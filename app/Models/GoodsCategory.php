@@ -7,14 +7,44 @@ namespace App\Models;
 class GoodsCategory extends BaseModel
 {
     protected $table         = 'goods_category';
-    protected $prepositionSy = '——';
 
+
+    public function getSonsId($pId)
+    {
+        return self::querySon($pId,[]);
+    }
+
+    public function querySon($pId,$ids)
+    {
+        $ids[] = $pId;
+        if ( $nowData = GoodsCategory::where('parent_id',$pId)->get() ){
+            foreach ($nowData as  $nowDatum) {
+                return self::querySon($nowDatum->id,$ids);
+            }
+        }
+        return $ids;
+    }
+
+
+
+    /**
+     * 树形
+     * @return array
+     */
     public function selectTree()
     {
         $list = self::orderBy('order', 'asc')->get()->toArray();
         return self::buildSelectOptions($list);
     }
 
+    /**
+     * 封装树形
+     * @param array $nodes
+     * @param int $parentId
+     * @param string $prefix
+     * @param string $space
+     * @return array
+     */
     protected function buildSelectOptions(array $nodes = [], $parentId = 0, $prefix = '', $space = '&nbsp;')
     {
         $d      = '├─';
@@ -42,6 +72,7 @@ class GoodsCategory extends BaseModel
 
         return $options;
     }
+
 
     protected function hasNextSibling($nodes, $parentId, $index)
     {

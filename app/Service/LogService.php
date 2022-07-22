@@ -36,6 +36,4 @@ class LogService
         return self::$self;
         // TODO: Implement __clone() method.
     }
-
-
 }

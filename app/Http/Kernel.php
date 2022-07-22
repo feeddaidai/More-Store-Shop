@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\FrontendAuth;
+use App\Http\Middleware\Register;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +65,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        #'cors'=> \Medz\Cors\Laravel\Middleware\ShouldGroup::class,
+        'frontend' => \App\Http\Middleware\FrontendAuth::class,
+        #测试中间件写法
+        'register' => \App\Http\Middleware\Register::class,
+        'checkCode' => \App\Http\Middleware\CheckVerifyCode::class,
     ];
 }
