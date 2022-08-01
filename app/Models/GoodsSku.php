@@ -27,4 +27,9 @@ class GoodsSku extends BaseModel
     {
         return SkuSpecValue::getOne($this->id);
     }
+
+    public function checkStatus()
+    {
+
+    }
 }

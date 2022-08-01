@@ -25,7 +25,16 @@ Route::prefix('v1')->namespace('Api')->group(function () {
 
     //登录后页面 ---   个人中心等
     Route::middleware('frontend')->group(function () {
+        //购物车
+        Route::post('/car/add',[\App\Api\v1\CarApi::class,'addGoods']);
+        Route::post('/car',[\App\Api\v1\CarApi::class,'carList']);
+        Route::post('/car/plus',[\App\Api\v1\CarApi::class,'addCount']);
+        Route::post('/car/sub',[\App\Api\v1\CarApi::class,'subCount']);
 
+        //购物车结束
+        //其他接口
+        Route::post('/consignee',[\App\Api\v1\ConsigneeApi::class,'find']);
+        Route::post('/order/confirm',[\App\Api\v1\OrderApi::class,'confirm']);
     });
 });
 
