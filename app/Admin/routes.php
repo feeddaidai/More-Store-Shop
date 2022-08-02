@@ -20,7 +20,7 @@ Route::group([
 
     #用户
     $router->resource('user/normal','UserNormalController');
-
+    $router->resource('user/user_comment','CommentController');
 
     #api
     Route::get('api/spec','SpecController@getName');
