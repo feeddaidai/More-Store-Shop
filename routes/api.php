@@ -35,6 +35,7 @@ Route::prefix('v1')->namespace('Api')->group(function () {
         //其他接口
         Route::post('/consignee',[\App\Api\v1\ConsigneeApi::class,'find']);
         Route::post('/order/confirm',[\App\Api\v1\OrderApi::class,'confirm']);
+        Route::post('/check/token',[\App\Api\v1\ToolsApi::class,'checkToken']);
     });
 });
 

@@ -17,4 +17,9 @@ class ToolsApi extends BaseController
         return VerifyCodeService::getCode($request->post('mobile'));
     }
 
+    public function checkToken(Request $request)
+    {
+        return m_success();
+    }
+
 }

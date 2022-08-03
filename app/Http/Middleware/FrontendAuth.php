@@ -21,7 +21,7 @@ class FrontendAuth
         $token = $request->input('token', '');
         $jwt   = JwtService::getInstance();
         if (!$jwt->verifyToken($token)) {
-            return m_error('缺少必要参数');
+            return m_nlogin();
         }
         Auth::setUser($jwt->getUser());
         return $next($request);

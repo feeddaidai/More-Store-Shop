@@ -99,6 +99,16 @@ if (!function_exists('m_error')) {
     }
 }
 
+if (!function_exists('m_nlogin')) {
+    function m_nlogin()
+    {
+        return response()->json([
+            'code' => 599,
+            'msg'  => '请登录',
+        ]);
+    }
+}
+
 if ( !function_exists('check_phone') ){
     function check_phone($phone)
     {
