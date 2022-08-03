@@ -2,16 +2,10 @@
 
 namespace App\Admin\Repositories;
 
-use App\Models\User as Model;
+use App\Models\UserComment as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
 
-class UserNormal extends EloquentRepository
+class UserComment  extends EloquentRepository
 {
-    /**
-     * Model.
-     *
-     * @var string
-     */
     protected $eloquentClass = Model::class;
-
 }
