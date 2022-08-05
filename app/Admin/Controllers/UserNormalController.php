@@ -34,10 +34,14 @@ class UserNormalController extends AdminController
             $grid->column('comment','用户评论')->link()->display(function (){
                 return "<a target='_blank' href='user_comment/?id={$this->id}'>点击查看</a><br>";
             });
+            $grid->column('invoice','用户发票')->link()->display(function (){
+                return "<a target='_blank' href='invoice/?id={$this->id}'>点击查看</a><br>";
+            });
             $grid->column('add_time','注册时间')->display(function ($v){
                 $res = day_to_day($v);
                 return "已注册{$res}天";
             });
+            $grid->withBorder();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->like('account',"账号");
                 $filter->like('name',"用户名");
