@@ -131,7 +131,7 @@ CodeMirror.defineMode("d", function(config, parserConfig) {
     return state.context = state.context.prev;
   }
 
-  // Interface
+  // Connector
 
   return {
     startState: function(basecolumn) {

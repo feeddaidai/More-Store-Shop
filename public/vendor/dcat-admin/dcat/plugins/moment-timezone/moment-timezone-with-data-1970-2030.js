@@ -588,7 +588,7 @@
 	tz.zonesForCountry = zonesForCountry;
 
 	/************************************
-		Interface with Moment.js
+		Connector with Moment.js
 	************************************/
 
 	var fn = moment.fn;

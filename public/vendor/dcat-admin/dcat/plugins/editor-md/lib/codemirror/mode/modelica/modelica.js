@@ -106,7 +106,7 @@
       return "number";
     }
 
-    // Interface
+    // Connector
     return {
       startState: function() {
         return {

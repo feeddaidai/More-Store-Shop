@@ -15,6 +15,15 @@ class ConsigneeApi extends BaseController
     {
         $userId = \auth()->id();
         $data = Consignee::getAll($userId);
+        $once = false;
+        foreach ($data as $index => $datum) {
+            if( !$once ){
+                $datum->selected = true;
+                $once = true;
+            }else{
+                $datum->selected = false;
+            }
+        }
         return m_success('成功',$data);
     }
 }

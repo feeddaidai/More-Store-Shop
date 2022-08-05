@@ -31,6 +31,9 @@ Route::prefix('v1')->namespace('Api')->group(function () {
         Route::post('/car/plus',[\App\Api\v1\CarApi::class,'addCount']);
         Route::post('/car/sub',[\App\Api\v1\CarApi::class,'subCount']);
 
+        //订单
+        Route::post('/order/create',[\App\Api\v1\OrderApi::class,'createOrder']);
+
         //购物车结束
         //其他接口
         Route::post('/consignee',[\App\Api\v1\ConsigneeApi::class,'find']);

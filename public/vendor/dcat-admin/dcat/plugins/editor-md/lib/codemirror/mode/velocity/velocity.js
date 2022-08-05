@@ -172,7 +172,7 @@ CodeMirror.defineMode("velocity", function() {
         }
         return "meta";
     }
-    // Interface
+    // Connector
 
     return {
         startState: function() {

@@ -606,7 +606,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       /[,.]/.test(textAfter.charAt(0));
   }
 
-  // Interface
+  // Connector
 
   return {
     startState: function(basecolumn) {

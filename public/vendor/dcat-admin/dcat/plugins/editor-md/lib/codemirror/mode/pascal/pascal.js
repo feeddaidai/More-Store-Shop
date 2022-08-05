@@ -86,7 +86,7 @@ CodeMirror.defineMode("pascal", function() {
     return "comment";
   }
 
-  // Interface
+  // Connector
 
   return {
     startState: function() {
