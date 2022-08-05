@@ -3,13 +3,14 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Metrics\Examples;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers;
+use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Http\Controllers\Dashboard;
 use Dcat\Admin\Layout\Column;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 
-class HomeController extends Controller
+class HomeController extends AdminController
 {
     public function index(Content $content)
     {

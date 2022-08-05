@@ -20,7 +20,8 @@ Route::group([
 
     #用户
     $router->resource('user/normal','UserNormalController');
-    $router->resource('user/user_comment','CommentController');
+    $router->resource('user/user_comment','CommentController'); #用户评论
+    $router->resource('user/invoice','InvoiceController'); #用户发票
 
     #api
     Route::get('api/spec','SpecController@getName');
