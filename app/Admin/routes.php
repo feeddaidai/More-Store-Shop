@@ -23,6 +23,12 @@ Route::group([
     $router->resource('user/user_comment','CommentController'); #用户评论
     $router->resource('user/invoice','InvoiceController'); #用户发票
 
+    #店铺
+    $router->resource('store/store_list','StoreController');#店铺列表
+
+    #订单
+    $router->resource("order/order_list","OrderController");#订单
+
     #api
     Route::get('api/spec','SpecController@getName');
     Route::get('api/spec/value','SpecController@getValue');

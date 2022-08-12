@@ -18,7 +18,7 @@ class InvoiceController extends AdminController
                 if (isset($_GET["id"])){
                     $grid->model()->where("u_id",$_GET["id"]);
                 }
-                $grid->column("order_on","订单号");
+                $grid->column("order_code","订单号");
                 $grid->column("u_id","用户名")->display(function ($v){
                     return User::query()->where("id",$v)->value("name");
                 });
