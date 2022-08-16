@@ -2,6 +2,7 @@
 
 namespace App\Admin\Renderable\Expand;
 
+use App\Models\Expressage;
 use App\Models\OrderDetail;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Support\LazyRenderable;
@@ -20,7 +21,7 @@ class ExpandOrderAddress extends LazyRenderable
         return Grid::make(new OrderDetail(), function (Grid $grid)use($data){
             $grid->model()->where("order_id",$data["key"]);
             $grid->column("shipping_type",'快递公司')->display(function ()use($data){
-                return $data["shipping_type"];
+                return  Expressage::query()->where("id",$data["shipping_type"])->value("expressage_name");
             });
             $grid->column("shipping_code",'快递单号')->display(function ()use($data){
                 return $data["shipping_code"];
