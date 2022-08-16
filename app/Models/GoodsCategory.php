@@ -3,9 +3,10 @@
 
 namespace App\Models;
 
-
+use Dcat\Admin\Traits\ModelTree;
 class GoodsCategory extends BaseModel
 {
+    use ModelTree;
     protected $table         = 'goods_category';
 
 

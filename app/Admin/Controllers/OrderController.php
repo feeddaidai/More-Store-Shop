@@ -2,7 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Renderable\Expand\ExpandOrder;
+use App\Admin\Renderable\Expand\ExpandOrderAddress;
+use App\Admin\Renderable\Expand\ExpandOrderGoods;
 use App\Admin\Repositories\Oredr;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Http\Controllers\AdminController;
@@ -16,6 +17,7 @@ class OrderController extends AdminController
         return Grid::make(new Oredr(),function (Grid $grid){
             $grid->withBorder();
             $grid->model()->orderByDesc("created_at");
+            $grid->export();
             $grid->column("order_code","订单号");
             $grid->column("trade_no","第三方订单号");
             $grid->column("goods_amount","商品总价")->label();
@@ -38,8 +40,15 @@ class OrderController extends AdminController
                     2 => "red",
                 ]);
             $grid->column("refund_amount",'退款金额')->label();
-            $grid->column("goods_info","商品详情")->display("商品详情")->expand(ExpandOrder::make());
-            $grid->column("add","商品详情")->display("商品详情")->expand(ExpandOrder::make());
+            $grid->column("goods_info","商品详情")->display("商品详情")->expand(ExpandOrderGoods::make());
+            $grid->column("shipping_type","收货地址")->display("收货地址")->expand(function (){
+               $data = [
+                   'shipping_type' => $this->shipping_type,
+                   "shipping_code"=>$this->shipping_code,
+                   "shipping_fee"=>$this->shipping_fee,
+               ];
+                return ExpandOrderAddress::make($data);
+            });
         });
     }
 }

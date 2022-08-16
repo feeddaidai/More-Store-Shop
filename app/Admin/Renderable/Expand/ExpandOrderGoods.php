@@ -6,7 +6,7 @@ use App\Models\OrderGoods;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Support\LazyRenderable;
 
-class ExpandOrder extends LazyRenderable
+class ExpandOrderGoods extends LazyRenderable
 {
     public function render()
     {
