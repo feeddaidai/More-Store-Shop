@@ -8,4 +8,5 @@ use Dcat\Admin\Repositories\EloquentRepository;
 class UserComment  extends EloquentRepository
 {
     protected $eloquentClass = Model::class;
+    public static $data;
 }

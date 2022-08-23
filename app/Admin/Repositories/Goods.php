@@ -14,3 +14,4 @@ class Goods extends EloquentRepository
      */
     protected $eloquentClass = Model::class;
 }
+

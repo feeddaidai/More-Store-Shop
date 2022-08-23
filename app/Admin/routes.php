@@ -33,6 +33,10 @@ Route::group([
     #平台管理
     $router->resource("platform/expressage","platform\ExpressageController");#快递管理
 
+    #日志
+    $router->resource("admin/admin_log","AdminLogController");#平台操作日志
+
+
     #api
     Route::get('api/spec','SpecController@getName');
     Route::get('api/spec/value','SpecController@getValue');
