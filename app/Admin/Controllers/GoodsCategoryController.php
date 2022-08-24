@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\GoodsCategory;
-use App\Common\AdminLog;
 use Dcat\Admin\Form;
 use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Layout\Content;
@@ -16,7 +15,6 @@ class GoodsCategoryController extends AdminController
 
     public function index(Content $content)
     {
-        AdminLog::admin_log(json_encode($_GET),"商品分类模块",1,18);
         return $content->header('商品分类')
             ->body(function (Row $row) {
                 $tree = new Tree(new GoodsCategory());
@@ -27,6 +25,7 @@ class GoodsCategoryController extends AdminController
                 });
                 $row->column(12, $tree);
             });
+
     }
 
 

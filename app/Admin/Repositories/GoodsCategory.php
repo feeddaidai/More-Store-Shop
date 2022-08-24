@@ -23,8 +23,8 @@ class GoodsCategory extends EloquentRepository
      */
     public function delete(Form $form, array $originalData)
     {
-        $data = \App\Models\GoodsCategory::query()->where("parent_id",$form->getKey())->get();
-        if ($data->isEmpty()){
+        $data = \App\Models\GoodsCategory::query()->where("parent_id",$form->getKey())->value("id");
+        if (!$data){
            $res = \App\Models\GoodsCategory::query()->where("id",$form->getKey())->delete();
            if ($res) return true;
             return false;
