@@ -4,10 +4,11 @@ namespace App\Admin\Metrics\Examples;
 
 use Dcat\Admin\Admin;
 use Dcat\Admin\Widgets\Metrics\Donut;
+use Illuminate\Support\Facades\Redis;
 
-class NewDevices extends Donut
+class Order extends Donut
 {
-    protected $labels = ['Desktop', 'Mobile'];
+    protected $labels = ['今天', '昨天'];
 
     /**
      * 初始化卡片内容
@@ -19,8 +20,8 @@ class NewDevices extends Donut
         $color = Admin::color();
         $colors = [$color->primary(), $color->alpha('blue2', 0.5)];
 
-        $this->title('New Devices');
-        $this->subTitle('Last 30 days');
+        $this->title('今天和昨天订单');
+        $this->subTitle('订单');
         $this->chartLabels($this->labels);
         // 设置图表颜色
         $this->chartColors($colors);
@@ -45,10 +46,16 @@ class NewDevices extends Donut
      */
     public function fill()
     {
-        $this->withContent(44.9, 28.6);
-
+        $today = \App\Models\Order::query()->whereDate("created_at",date("Y-m-d"))->count();
+        if (empty(Redis::get("yesterday"))){
+            $yesterday = \App\Models\Order::query()->whereDate("created_at",date("Y-m-d", strtotime("-1 day")))->count();
+            Redis::set("yesterday",$yesterday);
+        }else{
+          $yesterday = Redis::get("yesterday");
+        }
+        $this->withContent($today, $yesterday);
         // 图表数据
-        $this->withChart([44.9, 28.6]);
+        $this->withChart([$today,$yesterday]);
     }
 
     /**
@@ -94,6 +101,7 @@ class NewDevices extends Donut
     </div>
     <div>{$mobile}</div>
 </div>
+
 HTML
         );
     }

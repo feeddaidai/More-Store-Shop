@@ -32,7 +32,8 @@ Route::group([
 
     #平台管理
     $router->resource("platform/expressage","platform\ExpressageController");#快递管理
-
+    $router->resource("platform/websiteSet","platform\WebsiteSetController");#网站设置
+    $router->resource("platform/website_agreemen","platform\WebsiteAgreementController");#网站协议
 
 
     #api
@@ -40,4 +41,5 @@ Route::group([
     Route::get('api/spec/value','SpecController@getValue');
 
 });
+
 

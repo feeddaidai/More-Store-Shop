@@ -328,19 +328,19 @@ return [
     */
     'layout'                    => [
         // default, blue, blue-light, green
-        'color'      => 'default',
+        'color'      => 'blue',
 
         // sidebar-separate
         'body_class' => [],
 
         'horizontal_menu' => false,
 
-        'sidebar_collapsed' => false,
+        'sidebar_collapsed' => true,
 
         // light, primary, dark
         'sidebar_style'     => 'light',
 
-        'dark_mode_switch' => false,
+        'dark_mode_switch' => true,
 
         // bg-primary, bg-info, bg-warning, bg-success, bg-danger, bg-dark
         'navbar_color'     => '',
@@ -374,3 +374,4 @@ return [
         'dir' => base_path('dcat-admin-extensions'),
     ],
 ];
+

@@ -5,6 +5,8 @@ namespace App\Admin\Controllers;
 use App\Admin\Renderable\Expand\ExpandOrderAddress;
 use App\Admin\Renderable\Expand\ExpandOrderGoods;
 use App\Admin\Repositories\Oredr;
+use App\Models\Store;
+use App\Models\User;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Http\Controllers\AdminController;
 
@@ -20,6 +22,10 @@ class OrderController extends AdminController
             $grid->export();
             $grid->column("order_code","订单号");
             $grid->column("trade_no","第三方订单号");
+            $grid->column("user_id","用户")->display(function ($v){
+                return User::query()->where("id",$v)->value("name");
+            });
+            $grid->column("store_name","店铺名");
             $grid->column("goods_amount","商品总价")->label();
             $grid->column("order_amount","订单总价(实际支付)")->label();
             $grid->column("order_status","订单状态")->using([0=>"待付款",1=>'已付款',2=>'已发货',3=>'已收货',4=>'已完成',5=>'订单取消'])->badge([
@@ -49,6 +55,33 @@ class OrderController extends AdminController
                ];
                 return ExpandOrderAddress::make($data);
             });
+            $grid->filter(function (Grid\Filter $filter){
+                $filter->panel();
+                $filter->where('name', function ($query) {
+                    $query->whereHas('user', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '用户名')->width(2);
+                $filter->equal('user_id',"用户ID")->width(2);
+                $filter->where('reciver_phone', function ($query) {
+                    $query->whereHas('order_detail', function ($query) {
+                        $query->where('reciver_phone', 'like', "%{$this->input}%");
+                    });
+                }, '收货号码')->width(2);
+                $filter->where('reciver_name', function ($query) {
+                    $query->whereHas('order_detail', function ($query) {
+                        $query->where('reciver_name', 'like', "%{$this->input}%");
+                    });
+                }, '收货姓名')->width(2);
+                $filter->equal('order_status',"状态")->select([0=>"待付款",1=>'已付款',2=>'已发货',3=>'已收货',4=>'已完成',5=>'订单取消'])->width(2);
+                $filter->equal("refund_status","是否退款")->select([0=>'无退款',1=>'部分退款',2=>'全部退款'])->width(2);
+                $filter->like("order_code","订单号")->width(3);
+                $filter->like("trade_no","第三方订单号")->width(3);
+                $filter->equal("store_id","店铺")->select(function (){
+                    return Store::query()->pluck("store_name","id");
+                })->width(2);
+            });
+            $grid->disableCreateButton();
         });
     }
 }
