@@ -3,11 +3,14 @@
 namespace App\Admin\Metrics\Examples;
 
 use App\Models\User;
+use Dcat\Admin\Admin;
 use Dcat\Admin\Widgets\Metrics\Card;
+use Dcat\Admin\Widgets\Metrics\Donut;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
-class TotalUsers extends Card
+class OrderSum extends Card
 {
     /**
      * 卡片底部内容.
@@ -15,6 +18,7 @@ class TotalUsers extends Card
      * @var string|Renderable|\Closure
      */
     protected $footer;
+
     /**
      * 初始化卡片.
      */
@@ -22,11 +26,11 @@ class TotalUsers extends Card
     {
         parent::init();
 
-        $this->title('注册用户');
+        $this->title('订单总金额');
         $this->dropdown([
             'today' => '当天',
             'month' => '当月',
-            'year' =>  '当年',
+            'year' => '当年',
         ]);
     }
 
@@ -39,22 +43,22 @@ class TotalUsers extends Card
      */
     public function handle(Request $request)
     {
-       $user = User::query();
+        $user = User::query();
         switch ($request->get('option')) {
             case 'today':
-               $data = $user->whereDate("created_at",date("Y-m-d"))->count();
+                $data = $user->whereDate("created_at", date("Y-m-d"))->count();
                 $this->content($data);
                 break;
             case 'month':
-                $data = $user->whereMonth("created_at",date("Y-m"))->count();
+                $data = $user->whereMonth("created_at", date("Y-m"))->count();
                 $this->content($data);
                 break;
             case 'year':
-                $data = $user->whereYear("created_at",date("Y"))->count();
+                $data = $user->whereYear("created_at", date("Y"))->count();
                 $this->content($data);
                 break;
             default:
-                $data = $user->whereDate("created_at",date("Y-m-d"))->count();
+                $data = $user->whereDate("created_at", date("Y-m-d"))->count();
                 $this->content($data);
 //                $this->up(15);
         }

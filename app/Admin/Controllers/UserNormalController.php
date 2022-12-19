@@ -37,6 +37,9 @@ class UserNormalController extends AdminController
             $grid->column('invoice','用户发票')->link()->display(function (){
                 return "<a target='_blank' href='invoice/?id={$this->id}'>点击查看</a><br>";
             });
+            $grid->column("order","用户订单")->link()->display(function (){
+                return "<a target='_blank' href='/admin/order/order_list/?user_id={$this->id}'>点击查看</a><br>";
+            });
             $grid->column('add_time','注册时间')->display(function ($v){
                 $res = day_to_day($v);
                 return "已注册{$res}天";
