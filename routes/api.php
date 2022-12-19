@@ -39,7 +39,16 @@ Route::prefix('v1')->namespace('Api')->group(function () {
         Route::post('/consignee',[\App\Api\v1\ConsigneeApi::class,'find']);
         Route::post('/order/confirm',[\App\Api\v1\OrderApi::class,'confirm']);
         Route::post('/check/token',[\App\Api\v1\ToolsApi::class,'checkToken']);
+
+        //收货地址
+        Route::post('/consignee/add',[\App\Api\v1\ConsigneeApi::class,'add']);
+        Route::post('/consignee/delete',[\App\Api\v1\ConsigneeApi::class,'delete']);
     });
+
+    //省市区
+    Route::post('/province/get',[\App\Api\v1\ToolsApi::class,'getProvince']);
+    Route::post('/city/get',[\App\Api\v1\ToolsApi::class,'getCity']);
+    Route::post('/area/get',[\App\Api\v1\ToolsApi::class,'getArea']);
 });
 
 

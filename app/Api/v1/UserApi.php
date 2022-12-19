@@ -37,7 +37,7 @@ class UserApi extends BaseController
             'user'  => [
                 'nick'   => $user->name,
                 'id'     => $user->id,
-                'mobile' => $user->mobile,
+                'mobile' => $this->phoneEncrypt($user->mobile)
             ]
         ]);
         #后续补充如果没有注册即自动注册
@@ -84,7 +84,7 @@ class UserApi extends BaseController
                 'user'  => [
                     'nick'   => $user->name,
                     'id'     => $id,
-                    'mobile' => $user->mobile,
+                    'mobile' => $this->phoneEncrypt($user->mobile)
                 ]
             ]);
         } catch (\Exception $exception) {
@@ -93,7 +93,17 @@ class UserApi extends BaseController
             DB::rollBack();
             return m_error('注册失败');
         }
+    }
+
+    public function index()
+    {
+        $userId = auth()->id();
+
+    }
 
 
+    protected function phoneEncrypt($phone)
+    {
+        return str_replace(substr($phone,3,4),'****',$phone);
     }
 }

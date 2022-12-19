@@ -20,16 +20,19 @@ class GoodsApi extends BaseController
 
     public function goodsDetail(Request $request)
     {
+
         $goodsId = $request->post('goods_id',null);
         $returnData = [];
         #如果参数为空，异常情况下可以获取一个随机商品进行展示
         if( !$goodsId )
             return m_error('缺少必要参数');
         $goodsModel = Goods::getGoodsBySku($goodsId);
+
         #商品软删或已下架
         if( !$goodsModel )
             return m_error('商品不存在或已下架');
         $returnData['goods'] = $goodsModel;
+
         return m_success('获取成功',$returnData);
     }
 

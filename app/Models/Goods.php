@@ -41,6 +41,7 @@ class Goods extends BaseModel
             ->where('id', $sku->goods_id)
             ->first();
         if (!$goods) return [];
+
         #封装规格
         $skuList    = [];
         $specItems  = [];
@@ -84,6 +85,7 @@ class Goods extends BaseModel
         for ($i = 0; $i < count($skuSpecList); $i++) {
             $default[] = 0;
         }
+
         foreach ($skuSpecList as $sindex => $sitem) {
             foreach ($specItems[$sindex + 1]['items'] as $itemKey => $si) {
                 if ($sitem['spec_value'] == $si['name']) {
